@@ -78,7 +78,7 @@ export function ConfirmaPagamento({simulacao}:SimulacaoProps) {
 
   return (
     <>
-      <Button size="sm" value="Contratar" fontSize="20" boxShadow="none" rounded="10" onClick={onOpen} />
+      <Button size="sm" value="Confirmar Simulação" fontSize="20" boxShadow="none" rounded="10" onClick={onOpen} />
       <Modal size="xl" closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
@@ -113,7 +113,7 @@ export function ConfirmaPagamento({simulacao}:SimulacaoProps) {
           </ModalBody>
 
           <ModalFooter>
-            <Button size="sm" isLoading={isLoading}  loadingText="Enviando" value="Contratar" fontSize="20" boxShadow="none" rounded="10" onClick={()=>sendEmail()} mr="3" isDisabled={!aceiteSimulacao || !aceiteContato} />
+            <Button size="sm" isLoading={isLoading}  loadingText="Enviando" value="Confirmar Simulação" fontSize="20" boxShadow="none" rounded="10" onClick={()=>sendEmail()} mr="3" isDisabled={!aceiteSimulacao || !aceiteContato} />
             <ChakraButton size="sm" fontSize="20" boxShadow="none" rounded="10" onClick={onClose} colorScheme="red">Voltar </ChakraButton>
           </ModalFooter>
         </ModalContent>

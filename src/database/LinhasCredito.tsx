@@ -21,7 +21,7 @@ export const LinhasCredito: linhasCreditoProps = {
     },
     prazoMaximo: 72,
     documentos: [
-      '2 último holerites',
+      '2 últimos holerites',
     ]
   },
   4732: {
@@ -35,7 +35,7 @@ export const LinhasCredito: linhasCreditoProps = {
     },
     prazoMaximo: 60,
     documentos: [
-      '2 último holerites',
+      '2 últimos holerites',
     ]    
   },
   1234: {
@@ -48,7 +48,7 @@ export const LinhasCredito: linhasCreditoProps = {
     },
     prazoMaximo: 240,
     documentos: [
-      '2 último holerites',
+      '2 últimos holerites',
     ]
   },
   5678: {
@@ -62,7 +62,7 @@ export const LinhasCredito: linhasCreditoProps = {
     },
     prazoMaximo: 60,
     documentos: [
-      '2 último holerites',
+      '2 últimos holerites',
       'Documento do carro'
     ]
   }

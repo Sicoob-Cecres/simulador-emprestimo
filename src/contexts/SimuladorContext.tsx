@@ -1,6 +1,8 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
 import { useToast } from "@chakra-ui/toast"
 
+import { api } from "../services/api";
+
 import { currency } from "../utils/masks";
 import { simulador } from "../utils/simulador";
 import { LinhasCredito } from "../database/LinhasCredito";
@@ -89,6 +91,24 @@ export function SimuladorProvider({ children }: AuthProviderProps) {
     while ( totalParcelas <= prazoMaximo) {
       let juros = taxaJuros[totalParcelas];
       if(juros) {
+
+        const response = await api.post("/emprestimo/simulador-emprestimo", {vlr_solicitado : valorSimulacao, vlr_taxa_juros: juros, nmr_max_parcela: totalParcelas});
+
+        if(response.status !== 200) {
+          toast({ title: "Erro desconhecido, tente novamente", status: "error", position: "top", isClosable: true });
+        }else{
+          const simulacao = response.data.simulacao[0]; 
+          dadosSimulacao.push({
+            linhaCredito: LinhasCredito[linhaCredito],
+            totalParcelas,
+            valorSolicitado: valor,
+            valorParcela: simulacao.vlr_parcela,
+            valorTotal: simulacao.vlr_devedor,
+            valorTaxaJuros: simulacao.vlr_taxa_juros,
+            valorTotalJuros: simulacao.vlr_juros,
+          })
+        }
+        /*
         let s = new simulador(valorSimulacao, juros, totalParcelas);
         dadosSimulacao.push({
           linhaCredito: LinhasCredito[linhaCredito],
@@ -99,11 +119,12 @@ export function SimuladorProvider({ children }: AuthProviderProps) {
           valorTaxaJuros: juros,
           valorTotalJuros: s.calculaTotalJurosPrice(),
         })
+        */
       }
       
       totalParcelas += 12
     }
-
+    console.log(dadosSimulacao)
     setSimulacao(dadosSimulacao);  
     setTimeout(() => setIsLoading(false), 1000);
   }

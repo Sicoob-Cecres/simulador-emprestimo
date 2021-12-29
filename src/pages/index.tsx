@@ -70,7 +70,7 @@ const Home: NextPage = () => {
                       return (
                         <Tr key={k}>
                           <Td>{s.totalParcelas}X</Td>
-                          <Td>{s.valorParcela}<sup>*</sup></Td>
+                          <Td>{s.valorParcela.toLocaleString('pt-BR', {minimumFractionDigits: 2 , style: 'currency', currency: 'BRL'})}<sup>*</sup></Td>
                           <Td><ConfirmaPagamento simulacao={s} /></Td>
                         </Tr>
                       )
