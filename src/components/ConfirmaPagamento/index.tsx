@@ -67,7 +67,7 @@ export function ConfirmaPagamento({simulacao}:SimulacaoProps) {
         return false;
       }
       toast({ title: "Sua simulação foi recebida com sucesso, em breve nossa equipe entrará em contato.", status: "success", position: "top", isClosable: true });
-      setTimeout(() => router.reload(), 2000)
+      //setTimeout(() => router.reload(), 2000)
     })
     .catch( error => {
       toast({ title: "Ocorreu um erro ao enviar sua simulação.", status: "error", position: "top", isClosable: true });

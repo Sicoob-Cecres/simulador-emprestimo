@@ -8,7 +8,7 @@ export default async function handler( req, res) {
     return false;
   }
   
-  const response = await api.post("/neoassist/register-only", {nome, cpf, celular, email, simulacao});
+  const response = await api.post("/emprestimo/simulador-emprestimo/salvar", {nome, cpf, celular, email, simulacao});
 
   if(response.status !== 200) {
     res.status(500).end();
