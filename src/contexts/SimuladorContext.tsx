@@ -13,6 +13,7 @@ type SimuladorContextType = {
   linhaCredito?: number | null;
   valor?: string;
   simulacao?: Array<SimulacaoProps> | [];
+  LinhasCredito?: Object;
   gravaValor: (valor: string) => void;
   selectLinhaCredito: (id:number) => void;
   executaSimulacao: () => void;
@@ -124,13 +125,12 @@ export function SimuladorProvider({ children }: AuthProviderProps) {
       
       totalParcelas += 12
     }
-    console.log(dadosSimulacao)
     setSimulacao(dadosSimulacao);  
     setTimeout(() => setIsLoading(false), 1000);
   }
 
   return (
-    <SimuladorContext.Provider value={{ isLoading, valor, linhaCredito, simulacao, gravaValor, executaSimulacao, selectLinhaCredito, resetSimulacao}}>
+    <SimuladorContext.Provider value={{ isLoading, valor, linhaCredito, simulacao, LinhasCredito, gravaValor, executaSimulacao, selectLinhaCredito, resetSimulacao}}>
       {children}
     </SimuladorContext.Provider>
   );  

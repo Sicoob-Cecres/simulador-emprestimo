@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useDisclosure } from "@chakra-ui/hooks";
 import { useToast } from "@chakra-ui/toast"
 
@@ -41,7 +41,11 @@ export function ConfirmaPagamento({simulacao}:SimulacaoProps) {
   const router = useRouter()
 
   const toast = useToast();
-
+  /*
+  useEffect( () => {
+    console.log(isLoading)
+  },[isLoading])
+  */
   function sendEmail(){
 
     if(!nome || !cpf || !celular || !email){
@@ -52,7 +56,8 @@ export function ConfirmaPagamento({simulacao}:SimulacaoProps) {
 
     setIsLoading(true);
     setIsInvalid(false);
-    
+    toast({ title: "Estamos enviando sua solicitação por favor aguarde.", status: "success", position: "top", isClosable: true });
+
     fetch('/api/registraSimulacao', {
       method: 'POST',
       headers: {
@@ -67,7 +72,7 @@ export function ConfirmaPagamento({simulacao}:SimulacaoProps) {
         return false;
       }
       toast({ title: "Sua simulação foi recebida com sucesso, em breve nossa equipe entrará em contato.", status: "success", position: "top", isClosable: true });
-      //setTimeout(() => router.reload(), 2000)
+      setTimeout(() => router.reload(), 2000)
     })
     .catch( error => {
       toast({ title: "Ocorreu um erro ao enviar sua simulação.", status: "error", position: "top", isClosable: true });
@@ -110,10 +115,10 @@ export function ConfirmaPagamento({simulacao}:SimulacaoProps) {
               <Checkbox borderColor="black" isChecked={aceiteContato} onChange={(e) => setAceiteContato(!aceiteContato)} color="black" colorScheme="green">Concordo em receber contato de um representante do Sicoob Cecres a respeito da minha simulação </Checkbox>
             </Stack>
 
-          </ModalBody>
+          </ModalBody> 
 
           <ModalFooter>
-            <Button size="sm" isLoading={isLoading}  loadingText="Enviando" value="Confirmar Simulação" fontSize="20" boxShadow="none" rounded="10" onClick={()=>sendEmail()} mr="3" isDisabled={!aceiteSimulacao || !aceiteContato} />
+            <Button size="sm" isLoading={isLoading} loadingText="Enviando" value="Confirmar Simulação" fontSize="20" boxShadow="none" rounded="10" onClick={()=>sendEmail()} mr="3" isDisabled={!aceiteSimulacao || !aceiteContato} />
             <ChakraButton size="sm" fontSize="20" boxShadow="none" rounded="10" onClick={onClose} colorScheme="red">Voltar </ChakraButton>
           </ModalFooter>
         </ModalContent>

@@ -8,9 +8,8 @@ import { ConfirmaPagamento } from "../components/ConfirmaPagamento";
 
 import { SimuladorContext } from "../contexts/SimuladorContext";
 
-
 const Home: NextPage = () => {
-  const { isLoading, linhaCredito, valor, simulacao, executaSimulacao, gravaValor, selectLinhaCredito } = useContext(SimuladorContext);
+  const { isLoading, linhaCredito, valor, simulacao, LinhasCredito, executaSimulacao, gravaValor, selectLinhaCredito } = useContext(SimuladorContext);
 
   const handleSetLinhaCredito = async (id:number) => {
     await selectLinhaCredito(id);
@@ -30,22 +29,16 @@ const Home: NextPage = () => {
       </Box>
       <Box>
         <VStack spacing="10px">
-          <HStack spacing="30px">
-            <div className="sicoob-icon-color-61 icon 12" />       
-            <Button value="Consignado" isActive={linhaCredito === 4722} onClick={() => handleSetLinhaCredito(4722)}/>
-          </HStack>
-          <HStack spacing="30px">
-            <div className="sicoob-icon-color-14 icon 12" />
-            <Button value="Crédito Pessoal" isActive={linhaCredito === 4732} onClick={() => handleSetLinhaCredito(4732)}/>
-          </HStack>
-          <HStack spacing="30px">
-            <div className="sicoob-icon-color-19 icon 12" />       
-            <Button value="Empréstimo com garantia de imóvel" isActive={linhaCredito === 1234} onClick={() => handleSetLinhaCredito(1234)}/>
-          </HStack>
-          <HStack spacing="30px">
-            <div className="sicoob-icon-color-49 icon 12" />
-            <Button value="Financiamento de veículos" isActive={linhaCredito === 5678} onClick={() => handleSetLinhaCredito(5678)}/>
-          </HStack>
+        {
+          Object.keys(LinhasCredito).map((key, index) => {
+            return (
+              <HStack spacing="30px" key={index}>
+                <div className={LinhasCredito[key]['icon']} />       
+                <Button value={LinhasCredito[key]['nmeLinha']} isActive={linhaCredito === key} onClick={() => handleSetLinhaCredito(key)}/>
+              </HStack>
+            );
+          })
+        }
         </VStack>
       </Box>
       <Box mx="auto" mt="50">
